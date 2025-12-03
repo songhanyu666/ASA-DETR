@@ -157,8 +157,6 @@ python -m torch.distributed.launch \
 | Parameter | Description | Default |
 |-----------|-------------|---------|
 | `--cfg` | Model configuration file path | configs/asa-detr.yaml |
-| `--data` | Dataset configuration file path | - |
-| `--weights` | Pretrained weights path | None |
 | `--epochs` | Number of training epochs | 150 |
 | `--batch-size` | Batch size | 8 |
 | `--img-size` | Input image size | 640 |
