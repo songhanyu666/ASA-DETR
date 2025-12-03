@@ -196,17 +196,7 @@ dataloader = DataLoader(dataset, batch_size=8, shuffle=True)
 | Himalayan Region | 687 | 29.9% |
 | Honshu Island Japan | 488 | 21.2% |
 
-## Citation
 
-If you use this dataset, please cite:
-
-```bibtex
-@dataset{rsld2k2025,
-  title={RSLD-2K: A Large-Scale Remote Sensing Landslide Detection Dataset},
-  author={Your Name},
-  year={2025}
-}
-```
 
 ## License
 
