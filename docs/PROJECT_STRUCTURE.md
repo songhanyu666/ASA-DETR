@@ -1,35 +1,35 @@
-# ASA-DETR 项目结构说明
+# ASA-DETR Project Structure
 
-## 📁 完整目录结构
+## 📁 Complete Directory Structure
 
 ```
 ASA-DETR/
-├── configs/                    # 配置文件目录
-│   └── asa-detr.yaml          # ASA-DETR模型配置
+├── configs/                    # Configuration files
+│   └── asa-detr.yaml          # ASA-DETR model configuration
 │
-├── models/                     # 模型定义目录
+├── models/                     # Model definitions
 │   ├── __init__.py
-│   ├── asa_detr.py            # ASA-DETR主模型
-│   ├── backbone/              # 主干网络
+│   ├── asa_detr.py            # ASA-DETR main model
+│   ├── backbone/              # Backbone network
 │   │   ├── __init__.py
-│   │   └── lasab.py           # LASAB轻量级自适应稀疏注意力主干
-│   ├── neck/                  # 特征金字塔网络
+│   │   └── lasab.py           # LASAB lightweight adaptive sparse attention backbone
+│   ├── neck/                  # Feature pyramid network
 │   │   ├── __init__.py
-│   │   └── soefpn.py          # SOEFPN小目标增强特征金字塔
-│   └── head/                  # 检测头（待实现）
+│   │   └── soefpn.py          # SOEFPN small object enhanced feature pyramid
+│   └── head/                  # Detection head (to be implemented)
 │       ├── __init__.py
-│       └── rtdetr_decoder.py  # RT-DETR解码器
+│       └── rtdetr_decoder.py  # RT-DETR decoder
 │
-├── utils/                      # 工具函数目录（待创建）
+├── utils/                      # Utility functions (to be created)
 │   ├── __init__.py
-│   ├── dataset.py             # 数据集加载
-│   ├── loss.py                # 损失函数
-│   ├── metrics.py             # 评估指标
-│   ├── general.py             # 通用工具
-│   └── visualize.py           # 可视化工具
+│   ├── dataset.py             # Dataset loading
+│   ├── loss.py                # Loss functions
+│   ├── metrics.py             # Evaluation metrics
+│   ├── general.py             # General utilities
+│   └── visualize.py           # Visualization tools
 │
-├── datasets/                   # 数据集目录
-│   └── RSLD-2K/               # RSLD-2K数据集
+├── datasets/                   # Datasets directory
+│   └── RSLD-2K/               # RSLD-2K dataset
 │       ├── images/
 │       │   ├── train/
 │       │   ├── val/
@@ -40,156 +40,158 @@ ASA-DETR/
 │       │   └── test/
 │       └── data.yaml
 │
-├── weights/                    # 模型权重目录
+├── weights/                    # Model weights directory
 │   ├── .gitkeep
-│   └── README.md              # 权重说明
+│   └── README.md              # Weights documentation
 │
-├── docs/                       # 文档目录
-│   ├── DATASET.md             # 数据集说明
-│   ├── PROJECT_STRUCTURE.md   # 项目结构说明
-│   ├── TRAINING.md            # 训练指南（待创建）
-│   └── images/                # 文档图片
+├── docs/                       # Documentation directory
+│   ├── DATASET.md             # Dataset documentation (Chinese)
+│   ├── DATASET_EN.md          # Dataset documentation (English)
+│   ├── PROJECT_STRUCTURE.md   # Project structure (Chinese)
+│   ├── PROJECT_STRUCTURE_EN.md # Project structure (English)
+│   └── images/                # Documentation images
 │
-├── runs/                       # 运行结果目录
-│   ├── train/                 # 训练结果
-│   ├── val/                   # 验证结果
-│   └── detect/                # 检测结果
+├── runs/                       # Results directory
+│   ├── train/                 # Training results
+│   ├── val/                   # Validation results
+│   └── detect/                # Detection results
 │
-├── train.py                    # 训练脚本
-├── val.py                      # 验证脚本
-├── detect.py                   # 推理脚本
-├── export.py                   # 模型导出脚本（待创建）
+├── train.py                    # Training script
+├── val.py                      # Validation script
+├── detect.py                   # Inference script
+├── export.py                   # Model export script (to be created)
 │
-├── requirements.txt            # Python依赖
-├── .gitignore                 # Git忽略文件
-├── LICENSE                     # 开源许可证
-└── README.md                   # 项目说明文档
+├── requirements.txt            # Python dependencies
+├── .gitignore                 # Git ignore file
+├── LICENSE                     # Open source license
+├── README.md                   # Project documentation (Chinese)
+└── README_EN.md                # Project documentation (English)
 ```
 
-## 📝 核心文件说明
+## 📝 Core Files Description
 
-### 1. 配置文件
+### 1. Configuration Files
 
 #### `configs/asa-detr.yaml`
-包含模型架构、训练参数、数据增强等所有配置信息。
+Contains all configuration information including model architecture, training parameters, and data augmentation.
 
-### 2. 模型文件
+### 2. Model Files
 
 #### `models/asa_detr.py`
-ASA-DETR主模型，整合LASAB、SOEFPN和RT-DETR Decoder。
+ASA-DETR main model, integrating LASAB, SOEFPN, and RT-DETR Decoder.
 
 #### `models/backbone/lasab.py`
-轻量级自适应稀疏注意力主干网络，包含：
-- **PCDSA**: 部分通道动态稀疏注意力
-- **CADG**: 内容自适应动态门控
-- **DSAB**: 动态稀疏注意力块
-- **AAE-CSP**: 自适应注意力增强跨阶段部分融合
+Lightweight Adaptive Sparse Attention Backbone, including:
+- **PCDSA**: Partial Channel Dynamic Sparse Attention
+- **CADG**: Content-Adaptive Dynamic Gating
+- **DSAB**: Dynamic Sparse Attention Block
+- **AAE-CSP**: Adaptive Attention Enhanced Cross-Stage Partial Fusion
 
 #### `models/neck/soefpn.py`
-小目标增强特征金字塔网络，包含：
-- **CSPMFOK**: 跨阶段部分连接多尺度频率感知全向卷积
-- **HMSAF**: 层次化多尺度注意力融合
-- **SPDConv**: 空间到深度卷积
+Small Object Enhanced Feature Pyramid Network, including:
+- **CSPMFOK**: Cross-Stage Partial Multi-scale Frequency-aware Omni-Kernel
+- **HMSAF**: Hierarchical Multi-Scale Attention Fusion
+- **SPDConv**: Space-to-Depth Convolution
 
-### 3. 训练和推理脚本
+### 3. Training and Inference Scripts
 
 #### `train.py`
-模型训练脚本，支持：
-- 从头训练
-- 预训练权重加载
-- 分布式训练
-- 混合精度训练
+Model training script, supporting:
+- Training from scratch
+- Loading pretrained weights
+- Distributed training
+- Mixed precision training
 
 #### `val.py`
-模型验证脚本，计算：
+Model validation script, computing:
 - mAP@0.5
 - mAP@0.5:0.95
 - Precision
 - Recall
 
 #### `detect.py`
-模型推理脚本，支持：
-- 单张图像推理
-- 批量图像推理
-- 视频推理
+Model inference script, supporting:
+- Single image inference
+- Batch image inference
+- Video inference
 
-## 🔧 待实现功能
+## 🔧 Features to be Implemented
 
-### 高优先级
-- [ ] RT-DETR Decoder实现
-- [ ] 损失函数实现
-- [ ] 数据集加载器实现
-- [ ] 评估指标实现
+### High Priority
+- [ ] RT-DETR Decoder implementation
+- [ ] Loss function implementation
+- [ ] Dataset loader implementation
+- [ ] Evaluation metrics implementation
 
-### 中优先级
-- [ ] 可视化工具（热力图、特征图等）
-- [ ] 模型导出（ONNX、TensorRT）
-- [ ] 训练日志和TensorBoard
-- [ ] 数据增强策略
+### Medium Priority
+- [ ] Visualization tools (heatmaps, feature maps, etc.)
+- [ ] Model export (ONNX, TensorRT)
+- [ ] Training logs and TensorBoard
+- [ ] Data augmentation strategies
 
-### 低优先级
-- [ ] 模型剪枝和量化
-- [ ] 分布式训练支持
-- [ ] 自动超参数搜索
-- [ ] Web演示界面
+### Low Priority
+- [ ] Model pruning and quantization
+- [ ] Distributed training support
+- [ ] Automatic hyperparameter search
+- [ ] Web demo interface
 
-## 📊 代码组织原则
+## 📊 Code Organization Principles
 
-1. **模块化设计**: 每个组件独立实现，便于测试和复用
-2. **配置驱动**: 所有超参数通过配置文件管理
-3. **文档完善**: 每个模块都有详细的docstring
-4. **代码规范**: 遵循PEP 8编码规范
-5. **版本控制**: 使用Git进行版本管理
+1. **Modular Design**: Each component is independently implemented for easy testing and reuse
+2. **Configuration-Driven**: All hyperparameters managed through configuration files
+3. **Well-Documented**: Each module has detailed docstrings
+4. **Code Standards**: Follows PEP 8 coding standards
+5. **Version Control**: Uses Git for version management
 
-## 🚀 快速开始
+## 🚀 Quick Start
 
-### 1. 环境配置
+### 1. Environment Setup
 ```bash
 conda create -n asa-detr python=3.9
 conda activate asa-detr
 pip install -r requirements.txt
 ```
 
-### 2. 数据准备
+### 2. Data Preparation
 ```bash
-# 下载RSLD-2K数据集
-# 解压到datasets/RSLD-2K/
+# Download RSLD-2K dataset
+# Extract to datasets/RSLD-2K/
 ```
 
-### 3. 训练模型
+### 3. Train Model
 ```bash
 python train.py --cfg configs/asa-detr.yaml --data datasets/RSLD-2K/data.yaml
 ```
 
-### 4. 测试模型
+### 4. Test Model
 ```bash
 python val.py --weights weights/asa-detr.pt --data datasets/RSLD-2K/data.yaml
 ```
 
-### 5. 推理
+### 5. Inference
 ```bash
 python detect.py --weights weights/asa-detr.pt --source path/to/image.jpg
 ```
 
-## 📖 相关文档
+## 📖 Related Documentation
 
-- [数据集说明](DATASET.md)
-- [训练指南](TRAINING.md)
-- [API文档](API.md)
-- [常见问题](FAQ.md)
+- [Dataset Documentation](DATASET_EN.md)
+- [Training Guide](TRAINING_EN.md)
+- [API Documentation](API_EN.md)
+- [FAQ](FAQ_EN.md)
 
-## 🤝 贡献指南
+## 🤝 Contribution Guidelines
 
-欢迎提交Issue和Pull Request！
+Welcome to submit Issues and Pull Requests!
 
-1. Fork本项目
-2. 创建特性分支 (`git checkout -b feature/AmazingFeature`)
-3. 提交更改 (`git commit -m 'Add some AmazingFeature'`)
-4. 推送到分支 (`git push origin feature/AmazingFeature`)
-5. 开启Pull Request
+1. Fork this project
+2. Create feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to branch (`git push origin feature/AmazingFeature`)
+5. Open Pull Request
 
-## 📧 联系方式
+## 📧 Contact
 
-如有问题，请通过以下方式联系：
-- Issues: [GitHub Issues](https://github.com/yourusername/ASA-DETR/issues)
+For questions, please contact:
+- Issues: [GitHub Issues](https://github.com/songhanyu666/ASA-DETR/issues)
 - Email: your.email@example.com

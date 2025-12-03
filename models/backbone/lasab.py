@@ -12,7 +12,6 @@ class PCDSA(nn.Module):
     Partial Channel Dynamic Sparse Attention
     """
     def __init__(self, dim, ratio=0.5):
-        super(PCDSA, self).__init__()
         self.dim = dim
         self.ratio = ratio
         self.partial_dim = int(dim * ratio)
@@ -31,7 +30,6 @@ class CADG(nn.Module):
     Content-Adaptive Dynamic Gating
     """
     def __init__(self, dim):
-        super(CADG, self).__init__()
         self.dim = dim
         
         # TODO: 实现CADG机制
@@ -48,7 +46,6 @@ class DSAB(nn.Module):
     Dynamic Sparse Attention Block
     """
     def __init__(self, dim, pcdsa_ratio=0.5, use_cadg=True):
-        super(DSAB, self).__init__()
         self.dim = dim
         
         # 深度卷积

@@ -45,7 +45,7 @@ class HMSAF(nn.Module):
     
     def forward(self, x1, x2):
         # TODO: 实现前向传播
-        x = torch.cat([x1, x2], dim=1)
+        x = torch.cat([x1, x2])
         return self.conv(x)
 
 

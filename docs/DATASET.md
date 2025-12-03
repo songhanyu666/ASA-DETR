@@ -1,98 +1,98 @@
-# RSLD-2K数据集说明
+# RSLD-2K Dataset Documentation
 
-## 数据集概述
+## Dataset Overview
 
-RSLD-2K（Remote Sensing Landslide Detection 2K）是专为遥感滑坡检测任务构建的大规模数据集。
+RSLD-2K (Remote Sensing Landslide Detection 2K) is a large-scale dataset specifically constructed for remote sensing landslide detection tasks.
 
-### 基本信息
+### Basic Information
 
-- **图像数量**: 2,299张
-- **标注数量**: 6,545个滑坡目标
-- **平均每张图像**: 2.85个滑坡实例
-- **数据来源**: Google Earth、Planet Labs、Sentinel-2
-- **覆盖区域**: 中国西南山区、喜马拉雅地区、日本本州岛等滑坡多发地带
+- **Number of Images**: 2,299
+- **Number of Annotations**: 6,545 landslide targets
+- **Average Instances per Image**: 2.85
+- **Data Sources**: Google Earth, Planet Labs, Sentinel-2
+- **Coverage Areas**: Southwest China mountains, Himalayan region, Honshu Island Japan, and other landslide-prone areas
 
-### 数据集划分
+### Dataset Split
 
-| 子集 | 图像数量 | 标注数量 | 比例 |
-|------|---------|---------|------|
-| 训练集 | 1,609 | 4,581 | 70% |
-| 验证集 | 460 | 1,311 | 20% |
-| 测试集 | 230 | 653 | 10% |
+| Subset | Images | Annotations | Ratio |
+|--------|--------|-------------|-------|
+| Training | 1,609 | 4,581 | 70% |
+| Validation | 460 | 1,311 | 20% |
+| Testing | 230 | 653 | 10% |
 
-## 数据集特点
+## Dataset Features
 
-### 1. 多样性
+### 1. Diversity
 
-- **地理多样性**: 覆盖多个地理区域和地质构造背景
-- **季节多样性**: 包含不同季节和气候条件下的滑坡样本
-- **尺度多样性**: 包含大、中、小不同尺度的滑坡目标
+- **Geographic Diversity**: Covers multiple geographic regions and geological backgrounds
+- **Seasonal Diversity**: Includes landslide samples under different seasons and climate conditions
+- **Scale Diversity**: Contains large, medium, and small-scale landslide targets
 
-### 2. 标注质量
+### 2. Annotation Quality
 
-- 由3名具有地质灾害识别经验的专业人员完成标注
-- 经过交叉验证确保标注质量
-- 采用矩形包围盒标注滑坡体的主体范围
+- Annotated by 3 professionals with geological hazard identification experience
+- Cross-validated to ensure annotation quality
+- Rectangular bounding boxes annotate the main body of landslides
 
-### 3. 标注准则
+### 3. Annotation Guidelines
 
-1. 矩形包围盒需完整框定滑坡体的主体范围（包括滑坡壁、滑坡舌和堆积区）
-2. 对于部分被植被或云层遮挡的滑坡，根据地形特征推断其边界
-3. 排除疑似滑坡和不确定目标，仅标注清晰可辨的滑坡体
+1. Bounding boxes must completely frame the main body of landslides (including landslide walls, tongues, and accumulation areas)
+2. For landslides partially obscured by vegetation or clouds, boundaries are inferred based on terrain features
+3. Exclude suspected landslides and uncertain targets, only annotate clearly identifiable landslide bodies
 
-## 数据集结构
+## Dataset Structure
 
 ```
 RSLD-2K/
 ├── images/
-│   ├── train/          # 训练集图像
+│   ├── train/          # Training images
 │   │   ├── 000001.jpg
 │   │   ├── 000002.jpg
 │   │   └── ...
-│   ├── val/            # 验证集图像
+│   ├── val/            # Validation images
 │   │   ├── 000001.jpg
 │   │   └── ...
-│   └── test/           # 测试集图像
+│   └── test/           # Testing images
 │       ├── 000001.jpg
 │       └── ...
 ├── labels/
-│   ├── train/          # 训练集标注（YOLO格式）
+│   ├── train/          # Training annotations (YOLO format)
 │   │   ├── 000001.txt
 │   │   ├── 000002.txt
 │   │   └── ...
-│   ├── val/            # 验证集标注
+│   ├── val/            # Validation annotations
 │   │   ├── 000001.txt
 │   │   └── ...
-│   └── test/           # 测试集标注
+│   └── test/           # Testing annotations
 │       ├── 000001.txt
 │       └── ...
-└── data.yaml           # 数据集配置文件
+└── data.yaml           # Dataset configuration file
 ```
 
-## 标注格式
+## Annotation Format
 
-### YOLO格式
+### YOLO Format
 
-每个txt文件对应一张图像，每行表示一个目标：
+Each txt file corresponds to one image, with each line representing one target:
 
 ```
 <class_id> <x_center> <y_center> <width> <height>
 ```
 
-其中：
-- `class_id`: 类别ID（滑坡为0）
-- `x_center, y_center`: 边界框中心点坐标（归一化到0-1）
-- `width, height`: 边界框宽度和高度（归一化到0-1）
+Where:
+- `class_id`: Class ID (landslide is 0)
+- `x_center, y_center`: Bounding box center coordinates (normalized to 0-1)
+- `width, height`: Bounding box width and height (normalized to 0-1)
 
-示例：
+Example:
 ```
 0 0.5123 0.4567 0.2345 0.1890
 0 0.7234 0.6789 0.1567 0.1234
 ```
 
-### COCO格式
+### COCO Format
 
-也支持COCO格式的标注，包含更详细的信息：
+Also supports COCO format annotations with more detailed information:
 
 ```json
 {
@@ -104,32 +104,31 @@ RSLD-2K/
 }
 ```
 
-## 数据集下载
+## Dataset Download
 
-### 方式1: 百度网盘
+### Baidu Netdisk
 
-链接: [待补充]
-提取码: [待补充]
+**Link**: https://pan.baidu.com/s/1iYlw3FvCyWV81jxMnjZBOQ?pwd=ap6u
+**Extraction Code**: ap6u
 
-### 方式2: Google Drive
+**File**: RSLD-2K.zip (Approximately 2.5GB)
 
-链接: [待补充]
-
-### 方式3: 学术网盘
-
-链接: [待补充]
-
-## 数据集使用
-
-### 1. 下载数据集
-
+After downloading, extract the zip file to the `datasets/` directory:
 ```bash
-# 下载并解压数据集
-wget [下载链接] -O RSLD-2K.zip
 unzip RSLD-2K.zip -d datasets/
 ```
 
-### 2. 配置data.yaml
+## Dataset Usage
+
+### 1. Download Dataset
+
+```bash
+# Download and extract dataset
+wget [download_link] -O RSLD-2K.zip
+unzip RSLD-2K.zip -d datasets/
+```
+
+### 2. Configure data.yaml
 
 ```yaml
 # datasets/RSLD-2K/data.yaml
@@ -138,11 +137,11 @@ train: images/train
 val: images/val
 test: images/test
 
-nc: 1  # 类别数
-names: ['landslide']  # 类别名称
+nc: 1  # Number of classes
+names: ['landslide']  # Class names
 ```
 
-### 3. 数据加载示例
+### 3. Data Loading Example
 
 ```python
 from torch.utils.data import Dataset, DataLoader
@@ -160,11 +159,11 @@ class LandslideDataset(Dataset):
         return len(self.img_files)
     
     def __getitem__(self, idx):
-        # 读取图像
+        # Read image
         img_path = os.path.join(self.img_dir, self.img_files[idx])
         img = cv2.imread(img_path)
         
-        # 读取标注
+        # Read annotations
         label_path = os.path.join(self.label_dir, 
                                   self.img_files[idx].replace('.jpg', '.txt'))
         with open(label_path, 'r') as f:
@@ -173,33 +172,33 @@ class LandslideDataset(Dataset):
         
         return img, labels
 
-# 使用示例
+# Usage example
 dataset = LandslideDataset('datasets/RSLD-2K/images/train',
                           'datasets/RSLD-2K/labels/train')
 dataloader = DataLoader(dataset, batch_size=8, shuffle=True)
 ```
 
-## 数据统计
+## Dataset Statistics
 
-### 滑坡尺寸分布
+### Landslide Size Distribution
 
-| 尺寸类别 | 数量 | 占比 |
-|---------|------|------|
-| 小目标 (<32²) | 1,856 | 28.4% |
-| 中目标 (32²-96²) | 3,245 | 49.6% |
-| 大目标 (>96²) | 1,444 | 22.0% |
+| Size Category | Count | Percentage |
+|--------------|-------|------------|
+| Small (<32²) | 1,856 | 28.4% |
+| Medium (32²-96²) | 3,245 | 49.6% |
+| Large (>96²) | 1,444 | 22.0% |
 
-### 地理区域分布
+### Geographic Distribution
 
-| 区域 | 图像数量 | 占比 |
-|------|---------|------|
-| 中国西南山区 | 1,124 | 48.9% |
-| 喜马拉雅地区 | 687 | 29.9% |
-| 日本本州岛 | 488 | 21.2% |
+| Region | Images | Percentage |
+|--------|--------|------------|
+| Southwest China | 1,124 | 48.9% |
+| Himalayan Region | 687 | 29.9% |
+| Honshu Island Japan | 488 | 21.2% |
 
-## 引用
+## Citation
 
-如果使用本数据集，请引用：
+If you use this dataset, please cite:
 
 ```bibtex
 @dataset{rsld2k2025,
@@ -209,12 +208,12 @@ dataloader = DataLoader(dataset, batch_size=8, shuffle=True)
 }
 ```
 
-## 许可证
+## License
 
-本数据集仅供学术研究使用，不得用于商业目的。
+This dataset is for academic research only and may not be used for commercial purposes.
 
-## 联系方式
+## Contact
 
-如有数据集相关问题，请联系：
+For dataset-related questions, please contact:
 - Email: your.email@example.com
-- Issues: [GitHub Issues](https://github.com/yourusername/ASA-DETR/issues)
+- Issues: [GitHub Issues](https://github.com/songhanyu666/ASA-DETR/issues)

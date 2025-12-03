@@ -89,7 +89,6 @@ class ASADETR(nn.Module):
         """加载预训练权重"""
         checkpoint = torch.load(weights_path, map_location='cpu')
         self.load_state_dict(checkpoint['model'], strict=False)
-        print(f'加载预训练权重: {weights_path}')
 
 
 def build_asa_detr(cfg):

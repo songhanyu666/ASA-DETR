@@ -1,76 +1,76 @@
-# ASA-DETR: 自适应稀疏注意力增强型RT-DETR遥感滑坡检测算法
+# ASA-DETR: Adaptive Sparse Attention Enhanced RT-DETR for Remote Sensing Landslide Detection
 
 [![Python](https://img.shields.io/badge/Python-3.9+-blue.svg)](https://www.python.org/)
 [![PyTorch](https://img.shields.io/badge/PyTorch-1.12+-red.svg)](https://pytorch.org/)
 [![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
-## 📋 简介
+## 📋 Introduction
 
-ASA-DETR是一种专为遥感滑坡检测设计的先进目标检测算法，基于RT-DETR改进。
+ASA-DETR is an advanced object detection algorithm specifically designed for remote sensing landslide detection, based on improvements to RT-DETR.
 
-### 核心创新
+### Core Innovations
 
-1. **LASAB（轻量级自适应稀疏注意力主干网络）** - 参数量减少30.8%
-2. **CSPMFOK（跨阶段部分连接多尺度频率感知全向卷积模块）** - 空域-频域联合学习
-3. **HMSAF（层次化多尺度注意力融合模块）** - 主动式自适应特征融合
+1. **LASAB (Lightweight Adaptive Sparse Attention Backbone)** - 30.8% parameter reduction
+2. **CSPMFOK (Cross-Stage Partial Multi-scale Frequency-aware Omni-Kernel)** - Spatial-frequency joint learning
+3. **HMSAF (Hierarchical Multi-Scale Attention Fusion)** - Active adaptive feature fusion
 
-### 性能指标
+### Performance Metrics
 
-**RSLD-2K数据集：**
+**RSLD-2K Dataset:**
 - mAP@0.5: 73.2% (↑3.7%)
 - mAP@0.5:0.95: 52.5% (↑2.2%)
 - Recall: 66.4% (↑4.5%)
-- 参数量: 18.3M (↓7.6%)
+- Parameters: 18.3M (↓7.6%)
 
-**DOTAv2数据集（跨域泛化）：**
+**DOTAv2 Dataset (Cross-domain Generalization):**
 - mAP@0.5: 55.1%
 - mAP@0.5:0.95: 35.9%
 
-## 🚀 快速开始
+## 🚀 Quick Start
 
-### 环境配置
+### Environment Setup
 
 ```bash
-# 创建虚拟环境
+# Create virtual environment
 conda create -n asa-detr python=3.9
 conda activate asa-detr
 
-# 安装依赖
+# Install dependencies
 pip install -r requirements.txt
 ```
 
-### 推理测试
+### Inference
 
 ```bash
-# 单张图像推理
+# Single image inference
 python detect.py --weights weights/asa-detr.pt --source path/to/image.jpg
 
-# 批量推理
+# Batch inference
 python detect.py --weights weights/asa-detr.pt --source path/to/images/
 ```
 
-### 训练模型
+### Training
 
 ```bash
 python train.py --cfg configs/asa-detr.yaml --data datasets/RSLD-2K/data.yaml --epochs 150 --batch-size 8
 ```
 
-### 评估模型
+### Evaluation
 
 ```bash
 python val.py --weights weights/asa-detr.pt --data datasets/RSLD-2K/data.yaml
 ```
 
-## 📊 数据集
+## � Dataset
 
-### RSLD-2K数据集
+### RSLD-2K Dataset
 
-- **图像数量**：2,299张
-- **标注数量**：6,545个滑坡目标
-- **数据来源**：Google Earth、Planet Labs、Sentinel-2
-- **覆盖区域**：中国西南山区、喜马拉雅地区、日本本州岛等
+- **Images**: 2,299
+- **Annotations**: 6,545 landslide targets
+- **Sources**: Google Earth, Planet Labs, Sentinel-2
+- **Coverage**: Southwest China mountains, Himalayan region, Honshu Island Japan, etc.
 
-数据集结构：
+Dataset structure:
 ```
 RSLD-2K/
 ├── images/
@@ -84,49 +84,53 @@ RSLD-2K/
 └── data.yaml
 ```
 
-## 📈 实验结果
+**Download Dataset:**
+- **Baidu Netdisk**: https://pan.baidu.com/s/1iYlw3FvCyWV81jxMnjZBOQ?pwd=ap6u (Code: ap6u)
+- See [Dataset Documentation](docs/DATASET.md) for more details
 
-### 与SOTA方法对比
+## 📈 Experimental Results
 
-| 模型 | mAP@0.5 | mAP@0.5:0.95 | Params | FLOPs |
-|------|---------|--------------|--------|-------|
+### Comparison with SOTA Methods
+
+| Model | mAP@0.5 | mAP@0.5:0.95 | Params | FLOPs |
+|-------|---------|--------------|--------|-------|
 | Faster-RCNN | 65.3% | 46.2% | 41.39M | 208G |
 | YOLOv11m | 70.1% | 50.7% | 20.04M | 67.7G |
 | RT-DETR-L | 71.6% | 51.8% | 33.0M | 103.5G |
 | **ASA-DETR** | **73.2%** | **52.5%** | 18.3M | 72.4G |
 
-### 消融实验
+### Ablation Study
 
-| 模型 | LASAB | CSPMFOK | HMSAF | mAP@0.5 |
-|------|-------|---------|-------|---------|
+| Model | LASAB | CSPMFOK | HMSAF | mAP@0.5 |
+|-------|-------|---------|-------|---------|
 | Baseline | ✗ | ✗ | ✗ | 69.5% |
 | +LASAB | ✓ | ✗ | ✗ | 70.6% |
 | +CSPMFOK | ✗ | ✓ | ✗ | 71.1% |
 | +HMSAF | ✗ | ✗ | ✓ | 70.8% |
 | **ASA-DETR** | ✓ | ✓ | ✓ | **73.2%** |
 
-## 📁 项目结构
+## � Project Structure
 
 ```
 ASA-DETR/
-├── configs/              # 配置文件
-├── models/              # 模型定义
-│   ├── backbone/        # LASAB主干网络
-│   ├── neck/           # SOEFPN特征金字塔
-│   └── head/           # RT-DETR检测头
-├── utils/              # 工具函数
-├── datasets/           # 数据集
-├── weights/            # 模型权重
-├── docs/               # 文档和图片
-├── train.py           # 训练脚本
-├── val.py             # 验证脚本
-├── detect.py          # 推理脚本
-└── requirements.txt   # 依赖列表
+├── configs/              # Configuration files
+├── models/              # Model definitions
+│   ├── backbone/        # LASAB backbone
+│   ├── neck/           # SOEFPN feature pyramid
+│   └── head/           # RT-DETR detection head
+├── utils/              # Utility functions
+├── datasets/           # Datasets
+├── weights/            # Model weights
+├── docs/               # Documentation
+├── train.py           # Training script
+├── val.py             # Validation script
+├── detect.py          # Inference script
+└── requirements.txt   # Dependencies
 ```
 
-## 📝 引用
+## 📝 Citation
 
-如果本项目对您的研究有帮助，请引用：
+If this project helps your research, please cite:
 
 ```bibtex
 @article{asa-detr2025,
@@ -137,22 +141,22 @@ ASA-DETR/
 }
 ```
 
-## 🙏 致谢
+## � Acknowledgments
 
-本项目基于以下优秀开源项目：
+This project is based on the following excellent open-source projects:
 - [RT-DETR](https://github.com/lyuwenyu/RT-DETR)
 - [Ultralytics](https://github.com/ultralytics/ultralytics)
 
-## 📄 许可证
+## 📄 License
 
-本项目采用 [MIT License](LICENSE) 开源协议。
+This project is licensed under the [MIT License](LICENSE).
 
-## 📧 联系方式
+## 📧 Contact
 
-如有问题或建议，欢迎通过以下方式联系：
-- Issues: [GitHub Issues](https://github.com/yourusername/ASA-DETR/issues)
-- Email: your.email@example.com
+For questions or suggestions:
+- Issues: [GitHub Issues](https://github.com/songhanyu666/ASA-DETR/issues)
+- Email: songhanyu2025@163.com
 
 ---
 
-⭐ 如果这个项目对您有帮助，请给我们一个Star！
+⭐ If this project helps you, please give us a Star!
