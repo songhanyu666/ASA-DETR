@@ -1,13 +1,5 @@
 # ASA-DETR
 
-[![Python](https://img.shields.io/badge/Python-3.9+-blue.svg)](https://www.python.org/)
-[![PyTorch](https://img.shields.io/badge/PyTorch-1.12+-red.svg)](https://pytorch.org/)
-[![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
-
-## 📋 Introduction
-
-ASA-DETR is an advanced object detection algorithm specifically designed for remote sensing landslide detection, based on improvements to RT-DETR.
-
 ### Performance Metrics
 
 **RSLD-2K Dataset:**
@@ -91,19 +83,6 @@ ASA-DETR/
 ├── val.py             # Validation script
 ├── detect.py          # Inference script
 └── requirements.txt   # Dependencies
-```
-
-## 📝 Citation
-
-If this project helps your research, please cite:
-
-```bibtex
-@article{asa-detr2025,
-  title={ASA-DETR: Adaptive Sparse Attention Enhanced RT-DETR for Remote Sensing Landslide Detection},
-  author={Your Name},
-  journal={Journal Name},
-  year={2025}
-}
 ```
 
 ## � Acknowledgments
