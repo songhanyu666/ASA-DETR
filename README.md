@@ -1,4 +1,4 @@
-# ASA-DETR: Adaptive Sparse Attention Enhanced RT-DETR for Remote Sensing Landslide Detection
+# ASA-DETR
 
 [![Python](https://img.shields.io/badge/Python-3.9+-blue.svg)](https://www.python.org/)
 [![PyTorch](https://img.shields.io/badge/PyTorch-1.12+-red.svg)](https://pytorch.org/)
@@ -7,12 +7,6 @@
 ## 📋 Introduction
 
 ASA-DETR is an advanced object detection algorithm specifically designed for remote sensing landslide detection, based on improvements to RT-DETR.
-
-### Core Innovations
-
-1. **LASAB (Lightweight Adaptive Sparse Attention Backbone)** - 30.8% parameter reduction
-2. **CSPMFOK (Cross-Stage Partial Multi-scale Frequency-aware Omni-Kernel)** - Spatial-frequency joint learning
-3. **HMSAF (Hierarchical Multi-Scale Attention Fusion)** - Active adaptive feature fusion
 
 ### Performance Metrics
 
@@ -62,14 +56,6 @@ python val.py --weights weights/asa-detr.pt --data datasets/RSLD-2K/data.yaml
 ```
 
 ## � Dataset
-
-### RSLD-2K Dataset
-
-- **Images**: 2,299
-- **Annotations**: 6,545 landslide targets
-- **Sources**: Google Earth, Planet Labs, Sentinel-2
-- **Coverage**: Southwest China mountains, Himalayan region, Honshu Island Japan, etc.
-
 Dataset structure:
 ```
 RSLD-2K/
@@ -87,27 +73,6 @@ RSLD-2K/
 **Download Dataset:**
 - **Baidu Netdisk**: https://pan.baidu.com/s/1iYlw3FvCyWV81jxMnjZBOQ?pwd=ap6u (Code: ap6u)
 - See [Dataset Documentation](docs/DATASET.md) for more details
-
-## 📈 Experimental Results
-
-### Comparison with SOTA Methods
-
-| Model | mAP@0.5 | mAP@0.5:0.95 | Params | FLOPs |
-|-------|---------|--------------|--------|-------|
-| Faster-RCNN | 65.3% | 46.2% | 41.39M | 208G |
-| YOLOv11m | 70.1% | 50.7% | 20.04M | 67.7G |
-| RT-DETR-L | 71.6% | 51.8% | 33.0M | 103.5G |
-| **ASA-DETR** | **73.2%** | **52.5%** | 18.3M | 72.4G |
-
-### Ablation Study
-
-| Model | LASAB | CSPMFOK | HMSAF | mAP@0.5 |
-|-------|-------|---------|-------|---------|
-| Baseline | ✗ | ✗ | ✗ | 69.5% |
-| +LASAB | ✓ | ✗ | ✗ | 70.6% |
-| +CSPMFOK | ✗ | ✓ | ✗ | 71.1% |
-| +HMSAF | ✗ | ✗ | ✓ | 70.8% |
-| **ASA-DETR** | ✓ | ✓ | ✓ | **73.2%** |
 
 ## � Project Structure
 
